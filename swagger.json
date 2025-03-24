@@ -1,191 +1,124 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Contacts Api",
-    "description": "Contacts Api",
+    "title": "Book API",
+    "description": "API for managing books",
     "version": "1.0.0"
   },
-  "host": "project1-flm5.onrender.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Local server"
+    },
+    {
+      "url": "https://cse-341-project1-he3j.onrender.com",
+      "description": "Production server"
+    }
   ],
   "paths": {
-    "/": {
+    "/books": {
       "get": {
-        "tags": [],
-        "description": "",
+        "summary": "Retrieve all books",
+        "tags": ["Books"],
         "responses": {
           "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/contacts/": {
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
+            "description": "A list of books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            }
           }
         }
       },
       "post": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+        "summary": "Add a new book",
+        "tags": ["Books"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
               }
             }
           }
-        ],
+        },
         "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "201": { "description": "Book created successfully" },
+          "400": { "description": "Invalid input" }
         }
       }
     },
-    "/contacts/{id}": {
-      "get": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
+    "/books/{id}": {
       "put": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
+        "summary": "Update an existing book",
+        "tags": ["Books"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "favoriteColor": {
-                  "example": "any"
-                },
-                "birthday": {
-                  "example": "any"
-                }
+            "description": "ID of the book to update",
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
               }
             }
           }
-        ],
+        },
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Book updated successfully" },
+          "400": { "description": "Invalid input or book ID" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Internal server error" }
         }
       },
       "delete": {
-        "tags": [
-          "Contacts"
-        ],
-        "description": "",
+        "summary": "Delete a book",
+        "tags": ["Books"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "description": "ID of the book to delete",
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+          "200": { "description": "Book deleted successfully" },
+          "400": { "description": "Invalid book ID" },
+          "404": { "description": "Book not found" },
+          "500": { "description": "Internal server error" }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "example": "The Great Gatsby" },
+          "author": { "type": "string", "example": "F. Scott Fitzgerald" },
+          "publishedYear": { "type": "integer", "example": 1925 },
+          "genre": { "type": "string", "example": "Classic Fiction" },
+          "price": { "type": "number", "example": 15.99 },
+          "ISBN": { "type": "string", "example": "978-0743273565" }
+        },
+        "required": ["title", "author", "publishedYear"]
       }
     }
   }

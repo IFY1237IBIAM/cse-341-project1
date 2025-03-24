@@ -1,32 +1,64 @@
-### GET ALL CONTACTS
-GET http://localhost:3000/Contacts
+# ### GET ALL CONTACTS
+# GET http://localhost:3000/Contacts
 
-### GET CONTACT BY ID
-GET http://localhost:3000/Contacts/67ccfeb2498684b9cdc0512e
+# ### GET CONTACT BY ID
+# GET http://localhost:3000/Contacts/67ccfeb2498684b9cdc0512e
 
-### CREATE CONTACT
-POST http://localhost:3000/Contacts HTTP/1.1
+# ### CREATE CONTACT
+# POST http://localhost:3000/Contacts HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "firstName": "Uche",
+#     "lastName": "Emma",
+#     "email": "uche@example.com",
+#     "favoriteColor": "green",
+#     "birthday": "2005-10-31T00:00:00.000Z"
+# }
+
+# ### UPDATE CONTACT
+# PUT http://localhost:3000/Contacts/67cc7f5a194c207304bc0830 HTTP/1.1
+# Content-Type: application/json
+
+# {
+#     "firstName": "John",
+#     "lastName": "Jons",
+#     "email": "john@example.com",
+#     "favoriteColor": "green",
+#     "birthday": "2003-06-30T00:00:00.000Z"
+# }
+
+# ### DELETE CONTACT
+# DELETE http://localhost:3000/Contacts/67cc7f5a194c207304bc0830
+### Get all books
+GET http://localhost:3001/books
+
+### Get a single book
+GET http://localhost:3001/books/
+
+### Create a new book
+POST http://localhost:3001/books
 Content-Type: application/json
 
 {
-    "firstName": "Uche",
-    "lastName": "Emma",
-    "email": "uche@example.com",
-    "favoriteColor": "green",
-    "birthday": "2005-10-31T00:00:00.000Z"
+    "title": "Harry KINGS",
+    "author": "J.K. Rowling",
+    "publishedYear": 1997,
+    "genre": "Fantasy",
+    "price": 20
 }
 
-### UPDATE CONTACT
-PUT http://localhost:3000/Contacts/67cc7f5a194c207304bc0830 HTTP/1.1
+### Update a book
+PUT http://localhost:3001/books/67e003b7fb8d7aee01fe2c01
 Content-Type: application/json
 
 {
-    "firstName": "John",
-    "lastName": "Jons",
-    "email": "john@example.com",
-    "favoriteColor": "green",
-    "birthday": "2003-06-30T00:00:00.000Z"
+    "title": "Harry Potter and the Chamber of Secrets",
+    "author": "J.K. Rowling",
+    "publishedYear": 1998,
+    "genre": "Fantasy",
+    "price": 26
 }
 
-### DELETE CONTACT
-DELETE http://localhost:3000/Contacts/67cc7f5a194c207304bc0830
+### Delete a book
+DELETE http://localhost:3001/books/67e05e64c410eb1313491a9f
