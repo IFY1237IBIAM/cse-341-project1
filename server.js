@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', require('./routes'));
 app.use('/books', require('./routes/books')); // Route for Books CRUD operations
+app.use('/author', require('./routes/author'));
 
 // Handle 404 - Undefined Routes
 app.use((req, res, next) => {

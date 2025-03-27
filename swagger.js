@@ -3,8 +3,8 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
     info: {
-        title: "Books Api",
-        description: "Books Api"
+        title: "Author Api",
+        description: "Author Api"
     },
     host: "localhost: 3001",
     schemes: ['https', 'http']
@@ -15,3 +15,6 @@ const endpointsFiles = ['./routes/index.js'];
 
 // this will now generate swagger.son
 swaggerAutogen(outputFile, endpointsFiles, doc);
+
+
+

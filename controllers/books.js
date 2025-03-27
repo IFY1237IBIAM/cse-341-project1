@@ -84,6 +84,3 @@ const deleteBook = async (req, res) => {
 
 // Export both functions
 module.exports = { getAllBooks, createBook, updateBook, deleteBook};
-
-
-
