@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Book API",
-    "description": "API for managing books",
+    "title": "Book and Author API",
+    "description": "API for managing books and authors",
     "version": "1.0.0"
   },
   "servers": [
@@ -50,8 +50,12 @@
           }
         },
         "responses": {
-          "201": { "description": "Book created successfully" },
-          "400": { "description": "Invalid input" }
+          "201": {
+            "description": "Book created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
         }
       }
     },
@@ -65,7 +69,9 @@
             "in": "path",
             "required": true,
             "description": "ID of the book to update",
-            "schema": { "type": "string" }
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -79,10 +85,18 @@
           }
         },
         "responses": {
-          "200": { "description": "Book updated successfully" },
-          "400": { "description": "Invalid input or book ID" },
-          "404": { "description": "Book not found" },
-          "500": { "description": "Internal server error" }
+          "200": {
+            "description": "Book updated successfully"
+          },
+          "400": {
+            "description": "Invalid input or book ID"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
         }
       },
       "delete": {
@@ -94,13 +108,118 @@
             "in": "path",
             "required": true,
             "description": "ID of the book to delete",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Book deleted successfully"
+          },
+          "400": {
+            "description": "Invalid book ID"
+          },
+          "404": {
+            "description": "Book not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/author": {
+      "get": {
+        "summary": "Retrieve all author",
+        "tags": ["Author"],
+        "responses": {
+          "200": {
+            "description": "A list of author",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Author"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new author",
+        "tags": ["Author"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Author created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/author/{id}": {
+      "put": {
+        "summary": "Update an existing author",
+        "tags": ["Author"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the author to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Author"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Author updated successfully" },
+          "400": { "description": "Invalid input or author ID" },
+          "404": { "description": "Author not found" },
+          "500": { "description": "Internal server error" }
+        }
+      },
+      "delete": {
+        "summary": "Delete an author",
+        "tags": ["Authors"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the author to delete",
             "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": { "description": "Book deleted successfully" },
-          "400": { "description": "Invalid book ID" },
-          "404": { "description": "Book not found" },
+          "200": { "description": "Author deleted successfully" },
+          "400": { "description": "Invalid author ID" },
+          "404": { "description": "Author not found" },
           "500": { "description": "Internal server error" }
         }
       }
@@ -111,14 +230,23 @@
       "Book": {
         "type": "object",
         "properties": {
-          "title": { "type": "string", "example": "The Great Gatsby" },
-          "author": { "type": "string", "example": "F. Scott Fitzgerald" },
-          "publishedYear": { "type": "integer", "example": 1925 },
-          "genre": { "type": "string", "example": "Classic Fiction" },
-          "price": { "type": "number", "example": 15.99 },
-          "ISBN": { "type": "string", "example": "978-0743273565" }
+          "title": { "type": "string" },
+          "author": { "type": "string" },
+          "publishedYear": { "type": "integer" },
+          "genre": { "type": "string" }
         },
         "required": ["title", "author", "publishedYear"]
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "books": { "type": "string"},
+          "completion": { "type": "string" },
+          "publishedYear": {"type": "integer"},
+          "dob": {"type": "integer"}
+        },
+        "required": ["name"]
       }
     }
   }

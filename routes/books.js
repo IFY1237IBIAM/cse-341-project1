@@ -1,19 +1,20 @@
 const express = require("express");
-const { body } = require("express-validator"); // ✅ FIXED: Import body
-const router = express.Router();
-const booksController = require("../controllers/books");
+const { body } = require("express-validator");
+const router = express.Router(); // ✅ cleaner and correct
+const authorController = require("../controllers/author");
+const { isAuthenticated } = require("../middleware/authenticate");
 
-// Validation middleware
-const validateBook = [
-    body("title").notEmpty().withMessage("Title is required"),
-    body("author").notEmpty().withMessage("Author is required"),
+// ✅ Validation middleware
+const validateAuthor = [
+    body("name").notEmpty().withMessage("Name is required"),
+    body("books").notEmpty().withMessage("Books is required"),
     body("publishedYear").isInt().withMessage("Published year must be a number"),
 ];
 
-// Define routes
-router.get("/", booksController.getAllBooks);
-router.post("/", validateBook, booksController.createBook);
-router.put("/:id", validateBook, booksController.updateBook);
-router.delete("/:id", booksController.deleteBook);
+// ✅ Define routes
+router.get("/", authorController.getAllAuthor);
+router.post("/", isAuthenticated, validateAuthor, authorController.createAuthor);
+router.put("/:id", isAuthenticated, validateAuthor, authorController.updateAuthor);
+router.delete("/:id", isAuthenticated, authorController.deleteAuthor);
 
 module.exports = router;
