@@ -36,6 +36,7 @@ app
 .use(cors({ origin: '*'}))
 .use('/', require('./routes/index.js'));
 
+
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -65,6 +66,8 @@ app.get('/github/callback', passport.authenticate('github', {
 
 app.use('/books', require('./routes/books')); // Route for Books CRUD operations
 app.use('/author', require('./routes/author'));
+app.use ('/task', require('./routes/task.js'))
+app.use('/user', require('./routes/user.js'))
 
 // Handle 404 - Undefined Routes
 app.use((req, res, next) => {

@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Book and Author API",
-    "description": "API for managing books and authors",
+    "description": "Task Management Api",
     "version": "1.0.0"
   },
   "servers": [
@@ -16,19 +16,19 @@
     }
   ],
   "paths": {
-    "/books": {
+    "/user": {
       "get": {
-        "summary": "Retrieve all books",
-        "tags": ["Books"],
+        "summary": "Retrieve all users",
+        "tags": ["Users"],
         "responses": {
           "200": {
-            "description": "A list of books",
+            "description": "A list of users",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Book"
+                    "$ref": "#/components/schemas/User"
                   }
                 }
               }
@@ -37,21 +37,21 @@
         }
       },
       "post": {
-        "summary": "Add a new book",
-        "tags": ["Books"],
+        "summary": "Add a new user",
+        "tags": ["Users"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Book"
+                "$ref": "#/components/schemas/User"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Book created successfully"
+            "description": "user created successfully"
           },
           "400": {
             "description": "Invalid input"
@@ -59,16 +59,16 @@
         }
       }
     },
-    "/books/{id}": {
+    "/user/{id}": {
       "put": {
-        "summary": "Update an existing book",
-        "tags": ["Books"],
+        "summary": "Update an existing user",
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the book to update",
+            "description": "ID of the user to update",
             "schema": {
               "type": "string"
             }
@@ -79,20 +79,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Book"
+                "$ref": "#/components/schemas/User"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Book updated successfully"
+            "description": "User updated successfully"
           },
           "400": {
-            "description": "Invalid input or book ID"
+            "description": "Invalid input or user ID"
           },
           "404": {
-            "description": "Book not found"
+            "description": "user not found"
           },
           "500": {
             "description": "Internal server error"
@@ -100,14 +100,14 @@
         }
       },
       "delete": {
-        "summary": "Delete a book",
+        "summary": "Delete a user",
         "tags": ["Books"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the book to delete",
+            "description": "ID of the user to delete",
             "schema": {
               "type": "string"
             }
@@ -115,13 +115,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Book deleted successfully"
+            "description": "user deleted successfully"
           },
           "400": {
-            "description": "Invalid book ID"
+            "description": "Invalid user ID"
           },
           "404": {
-            "description": "Book not found"
+            "description": "user not found"
           },
           "500": {
             "description": "Internal server error"
@@ -129,19 +129,19 @@
         }
       }
     },
-    "/author": {
+    "/task": {
       "get": {
-        "summary": "Retrieve all author",
-        "tags": ["Author"],
+        "summary": "Retrieve all task",
+        "tags": ["Task"],
         "responses": {
           "200": {
-            "description": "A list of author",
+            "description": "A list of Task",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Author"
+                    "$ref": "#/components/schemas/Task"
                   }
                 }
               }
@@ -150,21 +150,21 @@
         }
       },
       "post": {
-        "summary": "Add a new author",
-        "tags": ["Author"],
+        "summary": "Add a new task",
+        "tags": ["Task"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Author"
+                "$ref": "#/components/schemas/Task"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Author created successfully"
+            "description": "Task created successfully"
           },
           "400": {
             "description": "Invalid input"
@@ -172,16 +172,16 @@
         }
       }
     },
-    "/author/{id}": {
+    "/task/{id}": {
       "put": {
-        "summary": "Update an existing author",
-        "tags": ["Author"],
+        "summary": "Update an existing task",
+        "tags": ["Task"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the author to update",
+            "description": "ID of the task to update",
             "schema": {
               "type": "string"
             }
@@ -192,34 +192,34 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Author"
+                "$ref": "#/components/schemas/Task"
               }
             }
           }
         },
         "responses": {
-          "200": { "description": "Author updated successfully" },
-          "400": { "description": "Invalid input or author ID" },
-          "404": { "description": "Author not found" },
+          "200": { "description": "Task updated successfully" },
+          "400": { "description": "Invalid input or task ID" },
+          "404": { "description": "Task not found" },
           "500": { "description": "Internal server error" }
         }
       },
       "delete": {
-        "summary": "Delete an author",
-        "tags": ["Authors"],
+        "summary": "Delete a task",
+        "tags": ["Task"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the author to delete",
+            "description": "ID of the task to delete",
             "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": { "description": "Author deleted successfully" },
-          "400": { "description": "Invalid author ID" },
-          "404": { "description": "Author not found" },
+          "200": { "description": "Task deleted successfully" },
+          "400": { "description": "Invalid task ID" },
+          "404": { "description": "task not found" },
           "500": { "description": "Internal server error" }
         }
       }
@@ -227,7 +227,7 @@
   },
   "components": {
     "schemas": {
-      "Book": {
+      "User": {
         "type": "object",
         "properties": {
           "title": { "type": "string" },
@@ -237,14 +237,14 @@
         },
         "required": ["title", "author", "publishedYear"]
       },
-      "Author": {
+      "Task": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
-          "books": { "type": "string"},
-          "completion": { "type": "string" },
-          "publishedYear": {"type": "integer"},
-          "dob": {"type": "integer"}
+          "title": { "type": "string" },
+          "description": { "type": "string"},
+          "completed": { "type": "string" },
+          "dueDate": {"type": "integer"},
+          "status": {"type": "string"}
         },
         "required": ["name"]
       }
