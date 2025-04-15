@@ -10,6 +10,6 @@ const doc = {
 };
 
 const outputFile = './swagger.json'; // Swagger JSON output
-const endpointsFiles = ['./routes/index.js', './routes/user.js', './routes/task.js']; // Endpoints for auto-gen
+const endpointsFiles = ['./routes/index.js', './routes/user.js', './routes/task.js', '/routes/user.js', './routes/project.js', '/routes/comment.js']; // Endpoints for auto-gen
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

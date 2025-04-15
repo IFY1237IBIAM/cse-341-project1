@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Book and Author API",
-    "description": "Task Management Api",
+    "title": "Project Management API",
+    "description": "User, Task, Project, and Comment management",
     "version": "1.0.0"
   },
   "servers": [
@@ -51,7 +51,7 @@
         },
         "responses": {
           "201": {
-            "description": "user created successfully"
+            "description": "User created successfully"
           },
           "400": {
             "description": "Invalid input"
@@ -61,88 +61,61 @@
     },
     "/user/{id}": {
       "put": {
-        "summary": "Update an existing user",
+        "summary": "Update a user",
         "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the user to update",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
+              "schema": { "$ref": "#/components/schemas/User" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "User updated successfully"
-          },
-          "400": {
-            "description": "Invalid input or user ID"
-          },
-          "404": {
-            "description": "user not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+          "200": { "description": "User updated successfully" },
+          "400": { "description": "Invalid input or ID" },
+          "404": { "description": "User not found" }
         }
       },
       "delete": {
         "summary": "Delete a user",
-        "tags": ["Books"],
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the user to delete",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "user deleted successfully"
-          },
-          "400": {
-            "description": "Invalid user ID"
-          },
-          "404": {
-            "description": "user not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
+          "200": { "description": "User deleted successfully" },
+          "400": { "description": "Invalid ID" },
+          "404": { "description": "User not found" }
         }
       }
     },
+
     "/task": {
       "get": {
-        "summary": "Retrieve all task",
-        "tags": ["Task"],
+        "summary": "Retrieve all tasks",
+        "tags": ["Tasks"],
         "responses": {
           "200": {
-            "description": "A list of Task",
+            "description": "A list of tasks",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Task"
-                  }
+                  "items": { "$ref": "#/components/schemas/Task" }
                 }
               }
             }
@@ -151,76 +124,222 @@
       },
       "post": {
         "summary": "Add a new task",
-        "tags": ["Task"],
+        "tags": ["Tasks"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Task"
-              }
+              "schema": { "$ref": "#/components/schemas/Task" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Task created successfully"
-          },
-          "400": {
-            "description": "Invalid input"
-          }
+          "201": { "description": "Task created successfully" },
+          "400": { "description": "Invalid input" }
         }
       }
     },
     "/task/{id}": {
       "put": {
-        "summary": "Update an existing task",
-        "tags": ["Task"],
+        "summary": "Update a task",
+        "tags": ["Tasks"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the task to update",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Task"
-              }
+              "schema": { "$ref": "#/components/schemas/Task" }
             }
           }
         },
         "responses": {
           "200": { "description": "Task updated successfully" },
-          "400": { "description": "Invalid input or task ID" },
-          "404": { "description": "Task not found" },
-          "500": { "description": "Internal server error" }
+          "400": { "description": "Invalid input or ID" },
+          "404": { "description": "Task not found" }
         }
       },
       "delete": {
         "summary": "Delete a task",
-        "tags": ["Task"],
+        "tags": ["Tasks"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "description": "ID of the task to delete",
             "schema": { "type": "string" }
           }
         ],
         "responses": {
           "200": { "description": "Task deleted successfully" },
-          "400": { "description": "Invalid task ID" },
-          "404": { "description": "task not found" },
-          "500": { "description": "Internal server error" }
+          "400": { "description": "Invalid ID" },
+          "404": { "description": "Task not found" }
+        }
+      }
+    },
+
+    "/project": {
+      "get": {
+        "summary": "Retrieve all projects",
+        "tags": ["Projects"],
+        "responses": {
+          "200": {
+            "description": "A list of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Project" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new project",
+        "tags": ["Projects"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Project" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Project created successfully" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/project/{id}": {
+      "put": {
+        "summary": "Update a project",
+        "tags": ["Projects"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Project" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Project updated successfully" },
+          "400": { "description": "Invalid input or ID" },
+          "404": { "description": "Project not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a project",
+        "tags": ["Projects"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Project deleted successfully" },
+          "400": { "description": "Invalid ID" },
+          "404": { "description": "Project not found" }
+        }
+      }
+    },
+
+    "/comment": {
+      "get": {
+        "summary": "Retrieve all comments",
+        "tags": ["Comments"],
+        "responses": {
+          "200": {
+            "description": "A list of comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Comment" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new comment",
+        "tags": ["Comments"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Comment" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Comment created successfully" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    "/comment/{id}": {
+      "put": {
+        "summary": "Update a comment",
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Comment" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Comment updated successfully" },
+          "400": { "description": "Invalid input or ID" },
+          "404": { "description": "Comment not found" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a comment",
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Comment deleted successfully" },
+          "400": { "description": "Invalid ID" },
+          "404": { "description": "Comment not found" }
         }
       }
     }
@@ -230,23 +349,39 @@
       "User": {
         "type": "object",
         "properties": {
-          "title": { "type": "string" },
-          "author": { "type": "string" },
-          "publishedYear": { "type": "integer" },
-          "genre": { "type": "string" }
+          "name": { "type": "string" },
+          "email": { "type": "string" },
+          "role": { "type": "string" }
         },
-        "required": ["title", "author", "publishedYear"]
+        "required": ["name", "email"]
       },
       "Task": {
         "type": "object",
         "properties": {
           "title": { "type": "string" },
-          "description": { "type": "string"},
-          "completed": { "type": "string" },
-          "dueDate": {"type": "integer"},
-          "status": {"type": "string"}
+          "description": { "type": "string" },
+          "status": { "type": "string" },
+          "dueDate": { "type": "string", "format": "date" }
+        },
+        "required": ["title"]
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "CreatedAt": {"type": "integer"}
         },
         "required": ["name"]
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "text": { "type": "string" },
+          "CreatedAt": { "type": "integer" }
+        },
+        "required": ["author", "text", "CreatedAt"]
       }
     }
   }
